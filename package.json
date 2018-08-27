@@ -1,0 +1,19 @@
+{
+  "name": "project-1-kevingordon995",
+  "version": "1.0.0",
+  "description": "Project 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1808-java-blake/project-1-kevingordon995.git"
+  },
+  "author": "Kevin Gordon <kevingordon995@yahoo.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1808-java-blake/project-1-kevingordon995/issues"
+  },
+  "homepage": "https://github.com/1808-java-blake/project-1-kevingordon995#readme"
+}

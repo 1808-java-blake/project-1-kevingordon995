@@ -4,7 +4,7 @@ function login(event) {
     let password = document.getElementById('inputPassword').value;
   
     const credentials = { username, password };
-    fetch('http://localhost:3000/data/employees/login', {
+    fetch('http://localhost:3000/employees/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

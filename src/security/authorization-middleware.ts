@@ -1,13 +1,13 @@
 
-export function authMiddleware(...roles: String[]) {
+export function authMiddleware(...roleIds: number[]) {
     return (req, resp, next) => {
       const user = req.session.user;
       if (!user) {
         resp.sendStatus(401);
         return;
       }
-      const hasPermission = roles.some(role => {
-        if (user.role === role) {
+      const hasPermission = roleIds.some(roleId => {
+        if (user.roleId === roleId) {
           return true;
         } else {
           return false;

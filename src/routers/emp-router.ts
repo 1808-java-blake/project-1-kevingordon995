@@ -4,21 +4,35 @@ import * as empDao from '../dao/emp-dao';
 
 export const empRouter = express.Router();
 
-empRouter.post('/employees', async (req: Request, resp: Response) => {
-    console.log('creating employee')
-    try {
-      const id = await empDao.createEmployee(req.body);
-      resp.status(201);
-      resp.json(id);
-    } catch (err) {
-      console.log(err);
-      resp.sendStatus(500);
-    }
-})
-empRouter.post('/userRoles', async (req, resp) => {
-  console.log('creating user roles')
+empRouter.get('', async (req: Request, resp: Response) => {
   try {
-    const id = await empDao.createUserRoles(req.body);
+    console.log('retrieving all users');
+    let users = await empDao.findAll();
+    resp.json(users);
+  } catch (err) {
+    console.log(err);
+    resp.sendStatus(500);
+  }
+});
+empRouter.get('/:id', async (req, resp) => {
+  const id = +req.params.id; // convert the id to a number
+  console.log(`retreiving user with id ${id}`);
+  try {
+    let user = await empDao.findById(id);
+    if (user !== undefined) {
+
+      resp.json(user);
+    } else {
+      resp.sendStatus(400);
+    }
+  } catch (err) {
+    resp.sendStatus(500);
+  }
+});
+empRouter.post('', async (req, resp) => {
+  console.log('creating employee')
+  try {
+    const id = await empDao.createEmployee(req.body);
     resp.status(201);
     resp.json(id);
   } catch (err) {
@@ -26,44 +40,53 @@ empRouter.post('/userRoles', async (req, resp) => {
     resp.sendStatus(500);
   }
 })
-empRouter.post('/managers', async (req, resp)=>{
-  console.log('creating manager')
+empRouter.post('/tickets/lodging', async (req, resp) => {
   try {
-    const id = await empDao.createManager(req.body);
+    const user = req.session.user;
+    const id = await empDao.createLodgingTicket(req.body, user.id);
     resp.status(201);
     resp.json(id);
-  } catch (err){
+  } catch (err) {
     console.log(err);
     resp.sendStatus(500);
   }
 })
-empRouter.post('/tickets/status', async (req, resp)=>{
-  console.log('creating status')
+empRouter.post('/tickets/travel', async (req, resp) => {
   try {
-    const id = await empDao.createStatus(req.body);
+    const user = req.session.user
+    const id = await empDao.createTravelTicket(req.body, user.id);
     resp.status(201);
     resp.json(id);
-  } catch (err){
+  } catch (err) {
     console.log(err);
     resp.sendStatus(500);
   }
 })
-empRouter.post('/tickets/types', async (req, resp)=>{
-  console.log('creating types')
+empRouter.post('/tickets/food', async (req, resp) => {
   try {
-    const id = await empDao.createTypes(req.body);
+    const user = req.session.user;
+    const id = await empDao.createFoodTicket(req.body, user.id);
     resp.status(201);
     resp.json(id);
-  } catch (err){
+  } catch (err) {
     console.log(err);
     resp.sendStatus(500);
   }
 })
-empRouter.post('/employees/login', async (req, resp) => {
-
+empRouter.post('/tickets/other', async (req, resp) => {
+  try {
+    const user = req.session.user;
+    const id = await empDao.createOtherTicket(req.body, user.id);
+    resp.status(201);
+    resp.json(id);
+  } catch (err) {
+    console.log(err);
+    resp.sendStatus(500);
+  }
+})
+empRouter.post('/login', async (req, resp) => {
   try {
     const user = await empDao.findByUsernameAndPassword(req.body.username, req.body.password);
-
     if (user) {
       req.session.user = user;// authorization for
       resp.json(user);
@@ -75,33 +98,3 @@ empRouter.post('/employees/login', async (req, resp) => {
     resp.sendStatus(500);
   }
 })
-empRouter.post('/tickets/cert', async (req, resp) => {
-    try {
-      const id = await empDao.createCertifTicket(req.body);
-      resp.status(201);
-      resp.json(id);
-    } catch (err) {
-      console.log(err);
-      resp.sendStatus(500);
-    }
-  })
-  empRouter.post('/tickets/travel', async (req, resp) => {
-    try {
-      const id = await empDao.createTravelTicket(req.body);
-      resp.status(201);
-      resp.json(id);
-    } catch (err) {
-      console.log(err);
-      resp.sendStatus(500);
-    }
-  })
-  empRouter.post('/tickets/medical', async (req, resp) => {
-    try {
-      const id = await empDao.createMedicalTicket(req.body);
-      resp.status(201);
-      resp.json(id);
-    } catch (err) {
-      console.log(err);
-      resp.sendStatus(500);
-    }
-  })

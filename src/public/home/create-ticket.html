@@ -6,32 +6,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>New Reimbursement Ticket</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="create-movie.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="home-page.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-  <link href="home-page.css" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="./employee-home.html">Reimbursement Home Page - Employee</a>
+        <a class="navbar-brand" href="employee-home.html">Reimbursement Home Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="./employee-home.html">Reimb. Table(Employee)<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="./create-ticket.html">Create Ticket</a>
+            <a class="nav-item nav-link" href="employee-home.html">Reimb. Table<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="create-ticket.html">Create Ticket</a>
+            <a class="nav-item nav-link" href="approve-deny.html">Approve/Deny Ticket</a>
           </div>
         </div>
     </nav>
     <div class = "container" wfd-id = "0">
       <div class="row justify-content-center" wfd-id = "1">
-          <div class="btn-group col-md-4">
+          <div class="btn-group col-md-3">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Submit Certification Reimbursement
+                Submit Lodging Reimbursement
               </button>
-              <form class="dropdown-menu p-4" onsubmit="createCertifTicket(event)">
+              <form class="dropdown-menu p-3" onsubmit="createLodgingTicket(event)">
                 <div class="form-group">
                   <label for="reimb-amount">Amount</label>
                   <input type="text" class="form-control" id="reimb-amount" placeholder="$0.00">
@@ -46,18 +46,18 @@
                 <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
               </form>
             </div>
-            <div class="btn-group col-md-4">
+            <div class="btn-group col-md-3">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Submit Travel Reimbursement
                 </button>
-                <form class="dropdown-menu p-4" onsubmit="createTravelTicket(event)">
+                <form class="dropdown-menu p-3" onsubmit="createTravelTicket(event)">
                   <div class="form-group">
-                    <label for="reimb-amount">Amount</label>
-                    <input type="text" class="form-control" id="reimb-amount" placeholder="$0.00">
+                    <label for="reimb-amount2">Amount</label>
+                    <input type="text" class="form-control" id="reimb-amount2" placeholder="$0.00">
                   </div>
                   <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows = "4" placeholder="Description of Request"></textarea>
+                    <label for="description2">Description</label>
+                    <textarea class="form-control" id="description2" rows = "4" placeholder="Description of Request"></textarea>
                   </div>
                   <div class="form-check">
                    
@@ -65,24 +65,45 @@
                   <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
                 </form>
               </div>
-              <div class="btn-group col-md-4">
+              <div class="btn-group col-md-3">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Submit Medical Reimbursement
+                  Submit Food Reimbursement
                 </button>
-                <form class="dropdown-menu p-4" onsubmit="createMedicalTicket(event)">
+                <form class="dropdown-menu p-3" onsubmit="createFoodTicket(event)">
                   <div class="form-group">
-                    <label for="reimb-amount">Amount</label>
-                    <input type="text" class="form-control" id="reimb-amount" placeholder="$0.00">
+                    <label for="reimb-amount3">Amount</label>
+                    <input type="text" class="form-control" id="reimb-amount3" placeholder="$0.00">
                   </div>
                   <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows = "4" placeholder="Description of Request"></textarea>
+                    <label for="description3">Description</label>
+                    <textarea class="form-control" id="description3" rows = "4" placeholder="Description of Request"></textarea>
                   </div>
                   <div class="form-check">
                    
                   </div>
                   <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
                 </form>
+
+              </div>
+              <div class="btn-group col-md-3">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Submit Miscellaneous Reimbursement
+                </button>
+                <form class="dropdown-menu p-3" onsubmit="createOtherTicket(event)">
+                  <div class="form-group">
+                    <label for="reimb-amount4">Amount</label>
+                    <input type="text" class="form-control" id="reimb-amount4" placeholder="$0.00">
+                  </div>
+                  <div class="form-group">
+                    <label for="description4">Description</label>
+                    <textarea class="form-control" id="description4" rows = "4" placeholder="Description of Request"></textarea>
+                  </div>
+                  <div class="form-check">
+                   
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
+                </form>
+                
               </div>
       </div>
     </div>
@@ -95,7 +116,10 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
   <!-- My Scripts -->
-  <script src="ticket.js"></script>
+  <script src="lodging-ticket.js"></script>
+  <script src="travel-ticket.js"></script>
+  <script src="food-ticket.js"></script>
+  <script src="other-ticket.js"></script>
 </body>
 
 </html>

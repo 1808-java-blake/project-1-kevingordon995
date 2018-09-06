@@ -1,12 +1,27 @@
-function filterTable(event) {
-    event.preventDefault();
-    const column = document.getElementById('filter-col').value;
-}
+function filterTable() {
+    // Declare variables 
+    let input, filter, table, tr, td, i;
+    input = document.getElementById("filter-id");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("ticket-table");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[5];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > - 1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      } 
+    }
+  }
 function approvedTicket(event) {
     event.preventDefault();
 
     const receipt = document.getElementById('approve-id').value;
-    const resolver = 17;
     let today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth() + 1;
@@ -26,10 +41,9 @@ function approvedTicket(event) {
 
     const resolved = {
         receipt,
-        resolver,
         submitted
     }
-    fetch(`http://localhost:3000/tickets/approved`, {
+    fetch(`http://localhost:3000/managers/approved`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -49,7 +63,6 @@ function deniedTicket(event) {
     event.preventDefault();
 
     const receipt = document.getElementById('deny-id').value;
-    const resolver = 17;
     let today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth() + 1;
@@ -69,10 +82,9 @@ function deniedTicket(event) {
 
     const resolved = {
         receipt,
-        resolver,
         submitted
     }
-    fetch(`http://localhost:3000/tickets/denied`, {
+    fetch(`http://localhost:3000/managers/denied`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',

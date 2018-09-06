@@ -26,7 +26,6 @@ function createTravelTicket(event) {
     amount,
     description,
     submitted,
-    author,
     resolver
   }
   fetch(`http://localhost:3000/employees/tickets/travel`, {

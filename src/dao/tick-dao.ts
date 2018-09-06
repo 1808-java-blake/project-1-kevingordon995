@@ -3,58 +3,26 @@ import { ErsReimbursementType } from "../model/ers-reimbursement-type";
 import { ErsReimbursementStatus } from "../model/ers-reimbursement-status";
 import { ErsReimbursement } from "../model/ers-reimbursement";
 import { ersReimbursementConverter } from "../util/ers-reimbursement-converter";
-import { SqlReimbursement } from "../dto/sql-ers-reimbursement";
 
-export async function findAll(): Promise<ErsReimbursement[]> {
+export async function findByIdOrAll(id: number, roleId: number): Promise<ErsReimbursement[]> {
   const client = await connectionPool.connect();
   try {
-    const resp = await client.query('SELECT * FROM ers.ers_reimbursement');
-    return resp.rows.map(ersReimbursementConverter);
-  } finally {
-    client.release();
-  }
-}
-
-/**
- * Retreive a movie by its id
- * @param id 
- */
-export async function findById(id: number): Promise<ErsReimbursement> {
-  const client = await connectionPool.connect();
-  try {
-    const resp = await client.query('SELECT * FROM ers.ers_reimbursement WHERE reimb_id = $1', [id]);
-    let ticket: SqlReimbursement = resp.rows[0];
-    if (ticket !== undefined) {
-      return ersReimbursementConverter(ticket);
+    if (roleId === 1){
+      const resp = await client.query('SELECT * FROM ers.ers_reimbursement WHERE reimb_author = $1', [id]);//reimb_id -> reimb_author  
+      return resp.rows.map(ersReimbursementConverter);
     } else {
-      return undefined;
+      const resp = await client.query('SELECT * FROM ers.ers_reimbursement');
+      return resp.rows.map(ersReimbursementConverter);
     }
   } finally {
     client.release();
   }
 }
-export async function approvedTicket(resolved): Promise<any>{
+export async function findAll(): Promise<ErsReimbursement[]> {
   const client = await connectionPool.connect();
   try {
-    const resp = await client.query(
-      `UPDATE ers.ers_reimbursement
-        SET reimb_resolved = $1, reimb_resolver = $2, reimb_status_id = 2
-        WHERE reimb_id = $3
-        RETURNING reimb_id`, [resolved.submitted, resolved.resolver, +resolved.receipt]);
-    return resp.rows[0].reimb_id;
-  } finally {
-    client.release();
-  }
-}
-export async function deniedTicket(resolved): Promise<any>{
-  const client = await connectionPool.connect();
-  try {
-    const resp = await client.query(
-      `UPDATE ers.ers_reimbursement
-        SET reimb_resolved = $1, reimb_resolver = $2, reimb_status_id = 3
-        WHERE reimb_id = $3
-        RETURNING reimb_id`, [resolved.submitted, resolved.resolver, +resolved.receipt]);
-    return resp.rows[0].reimb_id;
+    const resp = await client.query('SELECT * FROM ers.ers_reimbursement');
+    return resp.rows.map(ersReimbursementConverter);
   } finally {
     client.release();
   }

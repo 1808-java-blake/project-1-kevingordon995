@@ -8,7 +8,7 @@ function addTicketToTable(ticket) {
       <td>${ticket.resolved}</td>
       <td>${ticket.description}</td>
       <td>${ticket.resolver}</td>
-      <td id = "filter-col">${ticket.statusId}</td>
+      <td>${ticket.statusId}</td>
       <td>${ticket.typeId}</td>
     </tr>
     `

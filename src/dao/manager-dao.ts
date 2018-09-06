@@ -32,6 +32,32 @@ export async function findAll(): Promise<ErsUsers[]> {
       client.release();
     }
   }
+  export async function approvedTicket(resolved, resolver: number): Promise<any>{
+    const client = await connectionPool.connect();
+    try {
+      const resp = await client.query(
+        `UPDATE ers.ers_reimbursement
+          SET reimb_resolved = $1, reimb_resolver = $2, reimb_status_id = 2
+          WHERE reimb_id = $3
+          RETURNING reimb_id`, [resolved.submitted, resolver, +resolved.receipt]);
+      return resp.rows[0].reimb_id;
+    } finally {
+      client.release();
+    }
+  }
+  export async function deniedTicket(resolved, resolver: number): Promise<any>{
+    const client = await connectionPool.connect();
+    try {
+      const resp = await client.query(
+        `UPDATE ers.ers_reimbursement
+          SET reimb_resolved = $1, reimb_resolver = $2, reimb_status_id = 3
+          WHERE reimb_id = $3
+          RETURNING reimb_id`, [resolved.submitted, resolver, +resolved.receipt]);
+      return resp.rows[0].reimb_id;
+    } finally {
+      client.release();
+    }
+  }
 export async function findByUsernameAndPassword(username: string, password: string): Promise<ErsUsers> {
     const client = await connectionPool.connect();
     try {

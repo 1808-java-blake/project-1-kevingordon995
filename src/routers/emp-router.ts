@@ -4,32 +4,7 @@ import * as empDao from '../dao/emp-dao';
 
 export const empRouter = express.Router();
 
-empRouter.get('', async (req: Request, resp: Response) => {
-  try {
-    console.log('retrieving all users');
-    let users = await empDao.findAll();
-    resp.json(users);
-  } catch (err) {
-    console.log(err);
-    resp.sendStatus(500);
-  }
-});
-empRouter.get('/:id', async (req, resp) => {
-  const id = +req.params.id; // convert the id to a number
-  console.log(`retreiving user with id ${id}`);
-  try {
-    let user = await empDao.findById(id);
-    if (user !== undefined) {
-
-      resp.json(user);
-    } else {
-      resp.sendStatus(400);
-    }
-  } catch (err) {
-    resp.sendStatus(500);
-  }
-});
-empRouter.post('', async (req, resp) => {
+empRouter.post('', async (req: Request, resp: Response) => {
   console.log('creating employee')
   try {
     const id = await empDao.createEmployee(req.body);

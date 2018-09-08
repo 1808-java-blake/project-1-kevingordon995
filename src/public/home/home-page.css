@@ -2,7 +2,8 @@
     margin-top: 10px;
 }
 .container{
-    padding-top: 10px
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .input-group{
     padding: 5px 5px 5px 5px;
@@ -10,3 +11,7 @@
 p{
     padding: 5px 5px 5px 5px;
 }
+#createTicketDiv{
+    padding: 10px 10px 10px 10px;
+}
+

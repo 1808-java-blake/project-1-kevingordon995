@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import * as ticketDao from '../dao/tick-dao';
-import { authMiddleware } from '../security/authorization-middleware';
 
 export const ticketRouter = express.Router();
 /**
@@ -22,12 +21,12 @@ ticketRouter.get('', async (req: Request, resp: Response) => {
 /**
  * Find all tickets
  */
-ticketRouter.get('/all', async (req: Request, resp: Response) => {
-    try {
-      console.log('retrieving all tickets');
-      let tickets = await ticketDao.findAll();
-      resp.json(tickets);
-    } catch (err) {
-      resp.sendStatus(500);
-    }
-  });
+// ticketRouter.get('/all', async (req: Request, resp: Response) => {
+//     try {
+//       console.log('retrieving all tickets');
+//       let tickets = await ticketDao.findAll();
+//       resp.json(tickets);
+//     } catch (err) {
+//       resp.sendStatus(500);
+//     }
+//   });

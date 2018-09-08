@@ -1,23 +1,22 @@
 function filterTable() {
     // Declare variables 
-    let input, filter, table, tr, td, i;
-    input = document.getElementById("filter-id");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("ticket-table");
-    tr = table.getElementsByTagName("tr");
-  
+    let input = document.getElementById("filter-id");
+    let filter = input.value.toUpperCase();
+    let table = document.getElementById("ticket-table");
+    let tr = table.getElementsByTagName("tr");
+
     // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[5];
-      if (td) {
-        if (td.innerHTML.toUpperCase().indexOf(filter) > - 1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+    for (let i = 0; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[5];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > - 1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
         }
-      } 
     }
-  }
+}
 function approvedTicket(event) {
     event.preventDefault();
 
@@ -26,18 +25,13 @@ function approvedTicket(event) {
     let year = today.getFullYear();
     let month = today.getMonth() + 1;
     let day = today.getDay() + 2;
-    let hour = today.getHours();
-    let min = today.getMinutes();
     if (month < 10) {
         month = '0' + month;
     }
     if (day < 10) {
         day = '0' + day;
     }
-    if (min < 10) {
-        min = '0' + min;
-    }
-    let submitted = year + '-' + day + '-' + month + ' ' + hour + ':' + min;
+    let submitted = year + '-' + day + '-' + month;
 
     const resolved = {
         receipt,
@@ -51,7 +45,14 @@ function approvedTicket(event) {
         },
         body: JSON.stringify(resolved)
     })
-        .then(resp => resp.json())
+        .then(resp => {
+            if (resp.status === 403) {
+                $('#error-modal').modal('show');
+            } else {
+                return resp.json();
+            }
+            throw 'Unauthorized Access';
+        })
         .then(resp => {
             window.location = 'http://localhost:3000/home/approve-deny.html';
         })
@@ -67,18 +68,13 @@ function deniedTicket(event) {
     let year = today.getFullYear();
     let month = today.getMonth() + 1;
     let day = today.getDay() + 2;
-    let hour = today.getHours();
-    let min = today.getMinutes();
     if (month < 10) {
         month = '0' + month;
     }
     if (day < 10) {
         day = '0' + day;
     }
-    if (min < 10) {
-        min = '0' + min;
-    }
-    let submitted = year + '-' + day + '-' + month + ' ' + hour + ':' + min;
+    let submitted = year + '-' + day + '-' + month;
 
     const resolved = {
         receipt,
@@ -92,7 +88,14 @@ function deniedTicket(event) {
         },
         body: JSON.stringify(resolved)
     })
-        .then(resp => resp.json())
+        .then(resp => {
+            if (resp.status === 403) {
+                $('#error-modal').modal('toggle');
+            } else {
+                return resp.json();
+            }
+            throw 'Unauthorized Access';
+        })
         .then(resp => {
             window.location = 'http://localhost:3000/home/approve-deny.html';
         })

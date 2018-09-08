@@ -15,6 +15,16 @@ empRouter.post('', async (req: Request, resp: Response) => {
     resp.sendStatus(500);
   }
 })
+empRouter.post('/logout', async (req: Request, resp: Response) => {
+  try {
+    if (req.session) {
+      req.session.destroy;
+      resp.redirect('/');
+    }
+  } catch (err) {
+    resp.status(500);
+  }
+})
 empRouter.post('/tickets/lodging', async (req, resp) => {
   try {
     const user = req.session.user;

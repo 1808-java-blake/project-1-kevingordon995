@@ -8,10 +8,10 @@ export async function findByIdOrAll(id: number, roleId: number): Promise<ErsReim
   const client = await connectionPool.connect();
   try {
     if (roleId === 1){
-      const resp = await client.query('SELECT * FROM ers.ers_reimbursement WHERE reimb_author = $1', [id]);//reimb_id -> reimb_author  
+      const resp = await client.query('SELECT * FROM ers.ers_reimbursement WHERE reimb_author = $1 ORDER BY reimb_id', [id]);
       return resp.rows.map(ersReimbursementConverter);
     } else {
-      const resp = await client.query('SELECT * FROM ers.ers_reimbursement');
+      const resp = await client.query('SELECT * FROM ers.ers_reimbursement ORDER BY reimb_id');
       return resp.rows.map(ersReimbursementConverter);
     }
   } finally {

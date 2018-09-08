@@ -11,9 +11,10 @@
     crossorigin="anonymous">
 </head>
 
-<body>
+<body onload="colorTable()">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="employee-home.html">Reimbursement Home Page</a>
+    
+    <a class="navbar-brand" href="home-page.html">CompanyCo Reimbursement</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,35 +26,68 @@
         <a class="nav-item nav-link" href="approve-deny.html">Approve/Deny Ticket</a>
       </div>
     </div>
+    <div class="collapse navbar-collapse d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-light" onclick="logout(event)">Log out</button>
+    </div>
   </nav>
-  <form class="filter-table" onkeyup="filterTable()">
-    <div class="form-group input-group mb-3">
-      <input type="text" class="form-control" id="filter-id" placeholder="Enter Reimb. Type" aria-label="Reimb. Type" aria-describedby="button-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Filter</button>
+  <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="error-modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="error-modalLabel">Error - 403</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          You are unauthorized to perform this action
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
-  </form>
-  <p><strong>Key: 1-PENDING, 2-APPROVED, 3-DENIED</strong></p>
-  <form class = "was-approved" onsubmit="approvedTicket(event)">
+  </div>
+  <form class="filter-table" onkeyup="filterTable()">
     <div class="form-group input-group mb-3">
-      <input type="text" class="form-control" id="approve-id" placeholder="Enter Reimb. ID# to Approve" aria-label="Approved" aria-describedby="button-addon3">
+      <input type="text" class="form-control" id="filter-id" placeholder="Enter Reimb. Status" aria-label="Reimb. Status"
+        aria-describedby="button-addon2">
+    </div>
+  </form>
+  <form class="was-approved" onsubmit="approvedTicket(event)">
+    <div class="form-group input-group mb-3">
+      <input type="text" class="form-control" id="approve-id" placeholder="Enter Reimb. ID# to Approve" aria-label="Approved"
+        aria-describedby="button-addon3">
       <div class="input-group-append">
         <button class="btn btn-outline-success" type="submit" id="button-addon3">Approve</button>
       </div>
     </div>
   </form>
-  <form class = "was-denied" onsubmit="deniedTicket(event)">
+  <form class="was-denied" onsubmit="deniedTicket(event)">
     <div class="form-group input-group mb-3">
-      <input type="text" class="form-control" id="deny-id" placeholder="Enter Reimb. ID# to Deny" aria-label="Denied" aria-describedby="button-addon4">
+      <input type="text" class="form-control" id="deny-id" placeholder="Enter Reimb. ID# to Deny" aria-label="Denied"
+        aria-describedby="button-addon4">
       <div class="input-group-append">
         <button class="btn btn-outline-danger" type="submit" id="button-addon4">Deny</button>
       </div>
     </div>
   </form>
+  <div class="container">
+    <div class="row rounded">
+      <div class="col-sm bg-primary" id="pending-div">
+        1 - PENDING APPROVAL/DENIAL
+      </div>
+      <div class="col-sm bg-success" id="approval-div">
+        2 - APPROVED
+      </div>
+      <div class="col-sm bg-danger" id="denial-div">
+        3 - DENIED
+      </div>
+    </div>
+  </div>
   <div class="container" id="ticket-table-container">
     <div class="row">
-      <table class="table table-hover" id="ticket-table">
+      <table class="table table-hover table-bordered table-sm" id="ticket-table">
         <thead>
           <tr>
             <th scope="col">Reimb. Id</th>
@@ -70,6 +104,19 @@
 
         </tbody>
       </table>
+      <div class="container">
+        <div class="row rounded">
+          <div class="col-sm bg-primary" id="pending-div">
+            1 - PENDING APPROVAL/DENIAL
+          </div>
+          <div class="col-sm bg-success" id="approval-div">
+            2 - APPROVED
+          </div>
+          <div class="col-sm bg-danger" id="denial-div">
+            3 - DENIED
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -81,6 +128,7 @@
     crossorigin="anonymous"></script>
   <script src="emp-home.js"></script>
   <script src="approve-deny-filter.js"></script>
+  <script src="log-out.js"></script>
 </body>
 
 </html>

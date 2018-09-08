@@ -29,11 +29,9 @@ managerRouter.put('/denied', [authMiddleware(2), async (req, resp)=>{
 }])
 managerRouter.post('/login', async (req, resp) => {
    try {
-  
      const user = await managerDao.findByUsernameAndPassword(req.body.username, req.body.password);
-  
      if (user) {
-       req.session.user = user;// authorization for
+       req.session.user = user;
        resp.json(user);
      } else {
        resp.sendStatus(401);

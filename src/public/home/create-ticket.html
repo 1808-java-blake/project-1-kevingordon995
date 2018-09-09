@@ -13,7 +13,7 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-   
+
     <a class="navbar-brand" href="home-page.html">CompanyCo Reimbursement</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -32,107 +32,137 @@
   </nav>
   <main role="main" class="container">
     <div class="starter-template">
-      <h1>Create Reimbursement Table</h1>
+      <h1>Create Reimbursement Ticket</h1>
       <p class="lead">Submit new reimbursement request.<br></p>
     </div>
   </main>
-  <div class="container" wfd-id="0">
-    <div class="row justify-content-center" wfd-id="1">
-      <div class="btn-group col-md-3">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Submit Lodging Reimbursement
-        </button>
-        <form class="dropdown-menu p-3" onsubmit="createLodgingTicket(event)">
-          <div class="form-group">
-            <label for="reimb-amount">Amount</label>
-            <input type="text" class="form-control" id="reimb-amount" placeholder="$0.00">
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" rows="4" placeholder="Description of Request"></textarea>
-          </div>
-          <div class="form-check">
 
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
-        </form>
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+            aria-controls="collapseOne">
+            Lodging Reimbursement Ticket
+          </button>
+        </h5>
       </div>
-      <div class="btn-group col-md-3">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Submit Travel Reimbursement
-        </button>
-        <form class="dropdown-menu p-3" onsubmit="createTravelTicket(event)">
-          <div class="form-group">
-            <label for="reimb-amount2">Amount</label>
-            <input type="text" class="form-control" id="reimb-amount2" placeholder="$0.00">
-          </div>
-          <div class="form-group">
-            <label for="description2">Description</label>
-            <textarea class="form-control" id="description2" rows="4" placeholder="Description of Request"></textarea>
-          </div>
-          <div class="form-check">
 
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
-        </form>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <form onsubmit="createLodgingTicket(event)">
+            <div class="form-group">
+              <label for="reimb-amount">Amount</label>
+              <input type="text" class="form-control" id="reimb-amount" placeholder="$0.00">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" id="description" rows="4" placeholder="Description of Request"></textarea>
+            </div>
+            <div class="form-check">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
+          </form>
+        </div>
       </div>
-      <div class="btn-group col-md-3">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Submit Food Reimbursement
-        </button>
-        <form class="dropdown-menu p-3" onsubmit="createFoodTicket(event)">
-          <div class="form-group">
-            <label for="reimb-amount3">Amount</label>
-            <input type="text" class="form-control" id="reimb-amount3" placeholder="$0.00">
-          </div>
-          <div class="form-group">
-            <label for="description3">Description</label>
-            <textarea class="form-control" id="description3" rows="4" placeholder="Description of Request"></textarea>
-          </div>
-          <div class="form-check">
-
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
-        </form>
-
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo">
+            Travel Reimbursement Ticket
+          </button>
+        </h5>
       </div>
-      <div class="btn-group col-md-3">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Submit Miscellaneous Reimbursement
-        </button>
-        <form class="dropdown-menu p-3" onsubmit="createOtherTicket(event)">
-          <div class="form-group">
-            <label for="reimb-amount4">Amount</label>
-            <input type="text" class="form-control" id="reimb-amount4" placeholder="$0.00">
-          </div>
-          <div class="form-group">
-            <label for="description4">Description</label>
-            <textarea class="form-control" id="description4" rows="4" placeholder="Description of Request"></textarea>
-          </div>
-          <div class="form-check">
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          <form onsubmit="createTravelTicket(event)">
+            <div class="form-group">
+              <label for="reimb-amount2">Amount</label>
+              <input type="text" class="form-control" id="reimb-amount2" placeholder="$0.00">
+            </div>
+            <div class="form-group">
+              <label for="description2">Description</label>
+              <textarea class="form-control" id="description2" rows="4" placeholder="Description of Request"></textarea>
+            </div>
+            <div class="form-check">
 
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
-        </form>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+            aria-expanded="false" aria-controls="collapseThree">
+            Food Reimbursement Ticket
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          <form onsubmit="createFoodTicket(event)">
+            <div class="form-group">
+              <label for="reimb-amount3">Amount</label>
+              <input type="text" class="form-control" id="reimb-amount3" placeholder="$0.00">
+            </div>
+            <div class="form-group">
+              <label for="description3">Description</label>
+              <textarea class="form-control" id="description3" rows="4" placeholder="Description of Request"></textarea>
+            </div>
+            <div class="form-check">
 
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingFour">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
+            aria-expanded="false" aria-controls="collapseFour">
+            Miscellaneous Reimbursement Ticket
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+        <div class="card-body">
+          <form onsubmit="createOtherTicket(event)">
+            <div class="form-group">
+              <label for="reimb-amount4">Amount</label>
+              <input type="text" class="form-control" id="reimb-amount4" placeholder="$0.00">
+            </div>
+            <div class="form-group">
+              <label for="description4">Description</label>
+              <textarea class="form-control" id="description4" rows="4" placeholder="Description of Request"></textarea>
+            </div>
+            <div class="form-check">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Reimbursement Request</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
   <div id="footer">
-    <p class="lead">Please make sure that requests are
+    <p class="lead"><strong> Please make sure that requests are
       legitimate and reasonable before sending them to finance
-      managers.</p><br />
+      managers.</strong></p><br />
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">Lodging - Expenses for shelter while on the job.</li>
       <li class="list-group-item list-group-item-info">Travel - Expenses accrued while traveling for work reasons,
         usually sent with lodging requests.</li>
-      <li class="list-group-item list-group-item-info">Food - Expenses for food related expenses relating to work(ex.
+      <li class="list-group-item list-group-item-info">Food - Food related expenses relating to work (ex.
         Work luncheons or purchasing for clients).</li>
-      <li class="list-group-item list-group-item-info">Other - Expenses not described in the previous three
+      <li class="list-group-item list-group-item-info">Other - Work-related expenses not described in the previous three
         categories.</li>
     </ul>
   </div>

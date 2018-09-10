@@ -11,7 +11,7 @@ export async function findAll(): Promise<ErsUsers[]> {
         LEFT JOIN ers.ers_reimbursement r
         ON e.ers_users_id = r.reimb_author`);
 
-    // extract the users and their movies from the result set
+    
     const users = [];
     resp.rows.forEach((user_ticket_result) => {
       const ticket = ersReimbursementConverter(user_ticket_result);
@@ -86,7 +86,7 @@ export async function createLodgingTicket(ticket, author: number): Promise<numbe
     const resp = await client.query(
       `INSERT INTO ers.ers_reimbursement
         (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)
-        VALUES ($1, $2, null, $3, $4, $5, 1, 1)
+        VALUES ($1, $2::timestamp(0), null, $3, $4, $5, 1, 1)
         RETURNING reimb_id`, [ticket.amount, ticket.submitted, ticket.description, author, ticket.resolver]);
     return resp.rows[0].reimb_id;
   } finally {
